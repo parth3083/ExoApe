@@ -1,11 +1,18 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Power4 } from "gsap/all";
 import { IoMdMenu } from "react-icons/io";
 
 function Navbar() {
   return (
     <div className="w-full fixed z-[999]">
       <div className="max-w-screen-2xl sm:px-10 sm:py-10  px-5 py-5 text-white flex items-center justify-between">
-        <div className="logo">
+        <motion.div
+          className="logo"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          transition={{ ease: Power4.easeInOut, duration: 0.7 }}
+        >
           <svg
             viewBox="0 0 95 25"
             fill="none"
@@ -44,17 +51,33 @@ function Navbar() {
               data-v-1932cced=""
             ></path>
           </svg>
-        </div>
-        <span className="sm:hidden">
+        </motion.div>
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          transition={{ ease: Power4.easeInOut, duration: 0.7 }}
+          className="sm:hidden"
+        >
           <IoMdMenu className="h-30" />
-        </span>
-        <div className="links hidden sm:flex sm:items-center sm:gap-5">
+        </motion.span>
+        <motion.div className="links hidden sm:flex sm:items-center sm:gap-5">
           {["Work", "Studio", "News", "Contact"].map((item, index) => (
-            <a key={index} className="text-white ">
+            <motion.a
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 0.7 }}
+              transition={{
+                ease: Power4.easeInOut,
+                duration: 0.7,
+                staggerChildren: 0.3,
+                delay: index * 0.1,
+              }}
+              key={index}
+              className="text-white "
+            >
               {item}
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import vid from "../assets/PlayReel.mp4";
+import { gsap, Power4, ScrollTrigger } from "gsap/all";
 
 function PlayReel() {
+  const parent =useRef(null);
+  const videodiv = useRef(null);
+  const play = useRef(null);
+  const reel = useRef(null);
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: parent.current,
+        top: "0 0",
+        pin: true,
+        scrub: 1,
+      },
+    })
+   tl.to(videodiv.current, {
+
+      width: "95%",
+      height: "95%",
+      ease:Power4
+    },"a")
+  tl.to(play.current, {
+    x: "50%",
+    ease: Power4
+    },"a")
+  tl.to(reel.current, {
+    x: "-50%",
+    ease: Power4
+    },"a")
+  })
   return (
-    <div className="w-full h-screen bg-black text-white relative">
-      <div className="video-container bg-red-500 w-32 sm:w-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div ref={parent} className="w-full h-screen bg-black text-white relative">
+      <div ref={videodiv} className="video-container  w-32 sm:w-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <video loop muted autoPlay className="scale-[1.5]" src={vid}></video>
       </div>
       <div className="overlay absolute w-full h-full flex flex-col items-center py-10 justify-between ">
@@ -24,9 +54,9 @@ function PlayReel() {
           </svg>
           <h3>Work in motion</h3>
         </div>
-        <h1 className="flex items-center justify-center gap-20 sm:gap-96">
-          <div className="text-5xl font-light sm:text-9xl">Play</div>
-          <div className="text-5xl font-light sm:text-9xl">Reel</div>
+        <h1  className="flex items-center justify-center gap-20 sm:gap-96">
+          <div ref={play} className="text-5xl font-light sm:text-9xl">Play</div>
+          <div ref={reel} className="text-5xl font-light sm:text-9xl">Reel</div>
         </h1>
         <p className="px-10 text-center text-xssm:text-sm">
           Our work is best experienced in motion. Don’t forget to put on your

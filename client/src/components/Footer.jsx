@@ -3,7 +3,8 @@ import React from 'react'
 function Footer() {
   return (
       <div className='w-full flex flex-col h-[90vh] sm:pl-12 pl-8 pr-2 sm:pt-12 pt-20 bg-[#070707] text-[#E0CCBB]'>
-          <div className="heading">
+         
+          <div> <div className="heading ">
               <h1 className='text-6xl sm:text-[8vw] font-light'>Our</h1>
               <h1 className='text-6xl sm:text-[8vw] font-light'>Story</h1>
           </div>
@@ -28,7 +29,7 @@ function Footer() {
                   <h4 className='sm:text-2xl'>Instagram</h4>
               </div>
               </div>
-          </div>
+              </div></div>
     </div>
   )
 }

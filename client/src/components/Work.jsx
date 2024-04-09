@@ -3,6 +3,7 @@ import vid1 from "../assets/work-1.mp4";
 import vid2 from "../assets/work-2.mp4";
 import vid3 from "../assets/work-3.mp4";
 import vid4 from "../assets/work-4.mp4";
+import { motion } from "framer-motion";
 
 function Work() {
   const [elem, setelem] = useState([
@@ -54,7 +55,20 @@ function Work() {
           </svg>
           <h3 className="capitalized sm:text-2xl">Featured Projects</h3>
         </div>
-        <h1 className="text-6xl sm:text-[10rem] my-5">Work</h1>
+        <h1 className="text-6xl sm:text-[10rem] my-5 overflow-hidden">
+          <motion.span
+            initial={{ rotate: 90, y: "100%", opacity: 0 }}
+            animate={{ rotate: 0, y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              ease: [0.22, 1, 0.36, 1],
+              duration: 1.5,
+            }}
+            className="inline-block origin-left"
+          >
+            Work
+          </motion.span>
+        </h1>
         <p className="leading-2 sm:text-lg text-md">
           Highlights of cases that we passionately built with forward-thinking
           clients and friends over the years.
@@ -65,12 +79,18 @@ function Work() {
             return (
               <div
                 key={index}
-                className={`sm:px-[10vw]  sm:items-center elem w-full  sm:flex sm:gap-[8vw] mt-10`}
+                className={`sm:px-[10vw]  sm:items-center elem w-full  sm:flex sm:gap-[8vw] mt-10 overflow-hidden`}
               >
-                <div className="video w-full h-[104vw] sm:h-[30vw] sm:w-1/3 bg-red-500 overflow-hidden relative">
-                  <img
+                <motion.div
+                  data-scroll
+                  data-scroll-speed="-0.5"
+                  className="video w-full h-[104vw] sm:h-[30vw] sm:w-1/3  overflow-hidden relative"
+                >
+                  <motion.img
+                    initial={{ opacity: 1 }}
+                    whileHover={{ opacity: 0 }}
                     src={items.image}
-                    className="hidden sm:block w-full h-full object-cover"
+                    className="hidden  sm:absolute sm:top-0 sm:left-0 sm:z-[2] sm:block w-full h-full object-cover"
                     alt=""
                   />
                   <video
@@ -78,9 +98,9 @@ function Work() {
                     autoPlay
                     loop
                     src={items.video}
-                    className="block sm:hidden w-full h-full object-cover scale-[1.3]"
+                    className="block absolute z-[1]  w-full h-full object-cover scale-[1.3]"
                   ></video>
-                </div>
+                </motion.div>
                 <div className="mt-4">
                   <h3 className="font-semibold sm:text-4xl">{items.heading}</h3>
                   <h3 className="capitalize opacity-50 sm:text-xl">
